@@ -17,6 +17,7 @@ int main()
 	program.sprite = ft_new_sprite(program.mlx, "block.xpm");
 	program.sprite_position.x = 0;
 	program.sprite_position.y = 0;
+
 	// mlx function that draws an image into a window at the given position
 	mlx_put_image_to_window(program.mlx, program.window.reference,
 		program.sprite.reference, program.sprite_position.x, program.sprite_position.y);

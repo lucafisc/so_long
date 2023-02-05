@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/04 17:34:13 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:59:01 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ typedef struct s_color {
 	int a;
 }	t_color;
 
+typedef struct s_player
+{
+	void	*current_img;
+	int		framecount;
+	int		idle_frames;
+	void	*idle_img_0;
+	void	*idle_img_1;
+	int		action_frames;
+	void	*action_img;
+}	t_player;
+
+
 /* all info needed for an image */
 typedef struct	s_image {
 	void		*reference;
@@ -65,6 +77,8 @@ typedef struct	s_program {
 	t_window	window;
 	t_image		sprite;
 	t_vector	sprite_position;
+	t_vector	img_size;
+	t_player	player;
 }				t_program;
 
 void		ft_putnbr(int n);

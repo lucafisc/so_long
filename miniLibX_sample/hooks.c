@@ -21,9 +21,9 @@ int	ft_input(int key, void *param)
 	else if (key == 119)
 		program->sprite_position.y -= program->sprite.size.y;
 	// change color based on keys R, G and B.
-	else if (key == 15)
+	else if (key == 114)
 		turn_img_to_color(&program->sprite, new_color(255,0,0,0));
-	else if (key == 5)
+	else if (key == 113)
 		turn_img_to_color(&program->sprite, new_color(0,255,0,0));
 	else if (key == 11)
 		turn_img_to_color(&program->sprite, new_color(0,0,255,0));
