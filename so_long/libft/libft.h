@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:35:35 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 17:29:46 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:11:07 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_list
 {
@@ -72,5 +78,8 @@ int			ft_is_space(char x);
 int			ft_power(int nb, int power);
 int			*ft_itobin(int n);
 int			ft_bintoi(int binary[]);
+char		*get_next_line(int fd);
+char		*ft_strchr_nl(const char *s);
+char		*ft_joinnfree(char *stash, char *buff);
 
 #endif

@@ -1,7 +1,7 @@
-SRC = ./src/main.c ./src/draw_square.c ./src/control.c ./src/window.c
+SRC = ./src/main.c ./src/draw_square.c ./src/control.c ./src/window.c ./src/input.c
 OBJ = ${SRC:.c=.o}
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 NAME = so_long
 LIBFT = libft/libft.a
 PRINTF = ft_printf/ft_printf.a
