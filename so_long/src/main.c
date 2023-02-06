@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:04 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/06 16:38:13 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/06 21:15:53 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,45 @@ static void	open_player_imgs(t_program *app)
 			"sprites/player02.xpm", &app->img_size.x, &app->img_size.y);
 }
 
+static void	draw_walls(t_program *app)
+{
+	int	i;
+	int	j;
+	char **matrix;
+	void	*img1;
+	void	*img2;
+	int	*x;
+	int	k;
+
+	k = 64;
+	x = &k;
+	img1 = mlx_xpm_file_to_image(app->mlx,
+	"sprites/wall1.xpm", &app->img_size.x, &app->img_size.y);
+	img2 = mlx_xpm_file_to_image(app->mlx,
+	"sprites/wall2.xpm", &app->img_size.x, &app->img_size.y);
+	i = 0;
+	j = 0;
+	matrix = (*app).map.matrix;
+	while (matrix[i])
+	{
+		while (matrix[i][j])
+		{
+			if (matrix[i][j] == '1')
+			{
+				if ((*app).map.size.y == i + 1 || matrix[i + 1][j] != '1')
+					mlx_put_image_to_window(app->mlx, app->window.reference,
+					img2, j * 64, i * 64);
+				else
+					mlx_put_image_to_window(app->mlx, app->window.reference,
+					img1, j * 64, i * 64);
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
 void	init_imgs(t_program *app)
 {
 	open_player_imgs(app);
@@ -84,6 +123,7 @@ static void	player_animation(t_player *player)
 int	update(t_program *app)
 {
 	player_animation(&app->player);
+	draw_walls(app);
 	mlx_put_image_to_window(app->mlx, app->window.reference,
 	app->player.current_img, app->sprite_position.x, app->sprite_position.y);
 	return (1);
@@ -91,7 +131,7 @@ int	update(t_program *app)
 
 static void	anim_setup(t_program *app)
 {
-	app->player.idle_frames = 15000;
+	app->player.idle_frames = 150;
 	app->player.action_frames = 10;
 }
 
@@ -134,11 +174,11 @@ int	main(int argc, char *argv[])
 	else
 	{
 	app.mlx = mlx_init();
-	app.window = new_window(app.mlx, 1980, 1080, "so_long");
+	app.window = new_window(app.mlx, app.map.size.x * 64, app.map.size.y * 64, "so_long");
 	anim_setup(&app);
 	init_imgs(&app);
-	app.sprite_position.x = 500;
-	app.sprite_position.y = 500;
+	app.sprite_position.x = 64;
+	app.sprite_position.y = 64;
 	app.sprite.size.x = 64;
 	app.sprite.size.y = 64;
 	mlx_key_hook(app.window.reference, *input, &app);

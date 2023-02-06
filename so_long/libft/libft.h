@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:35:35 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/06 16:11:07 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:24:19 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int			*ft_itobin(int n);
 int			ft_bintoi(int binary[]);
 char		*get_next_line(int fd);
 char		*ft_strchr_nl(const char *s);
+char		*ft_joinnfree(char *stash, char *buff);
 char		*ft_joinnfree(char *stash, char *buff);
 
 #endif

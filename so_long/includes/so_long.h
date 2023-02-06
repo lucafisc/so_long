@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/06 16:28:27 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:29:21 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct	s_image {
 typedef struct s_map
 {
 	t_vector	size;
+	char		**matrix;
 }	t_map;
 
 typedef struct	s_program {
