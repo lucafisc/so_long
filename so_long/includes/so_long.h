@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/07 17:53:59 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/07 20:33:51 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define C_DOWN 115
 # define LEFT 65361
 # define C_LEFT 97
-# define RIGHT 65361
+# define RIGHT 65363
 # define C_RIGHT 100
 
 typedef enum s_bool

@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:04 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/07 17:54:43 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/07 20:37:47 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ static void	draw_exit(t_program *app)
 			{
 				mlx_put_image_to_window(app->mlx, app->window.reference,
 				app->exit.exit_closed_img, j * app->img_size, i * app->img_size);
+				return ;
+			}
+				if (matrix[i][j] == 'e')
+			{
+				mlx_put_image_to_window(app->mlx, app->window.reference,
+				app->exit.exit_open_img, j * app->img_size, i * app->img_size);
 				return ;
 			}
 			j++;

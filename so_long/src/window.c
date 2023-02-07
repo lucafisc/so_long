@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:27:24 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/04 17:56:08 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:49:26 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	close_app(void *param)
 {
-	//free(param->mlx);
+	t_program *app;
+
+	app = (t_program *)param;
+	//free(app->window.reference);
+	//free(app->mlx);
 	exit(0);
 	return ((*(int*)param));
 }
