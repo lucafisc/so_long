@@ -6,20 +6,31 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:45:36 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/04 17:35:56 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:56:36 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-
-int	key_event(int keycode, void *param)
+t_bool	allowed_move(t_map *map, )
 {
-	ft_printf("key pressed: %d\n", keycode);
-	return ((*(int*)param));
+	
 }
 
-void	hooks(t_program *app)
+int	control(int key, void *param)
 {
-	mlx_key_hook(app->window.reference, key_event, &app);
+	t_program *app;
+	app = (t_program *)param;
+	mlx_clear_window(app->mlx, app->window.reference);
+	if (key == 100)
+		app->player.position.x += app->img_size;
+	else if (key == 97)
+		app->player.position.x -= app->img_size;
+	else if (key == 115)
+		app->player.position.y += app->img_size;
+	else if (key == 119)
+		app->player.position.y -= app->img_size;
+	app->moves += 1;
+	printf("Key pressed -> %d\n", key);
+	return (0);
 }
