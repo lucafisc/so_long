@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:45:36 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/07 20:45:10 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:52:49 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ t_bool	move_is_allowed(t_program *app, int	key)
 	matrix = app->map.matrix;
 	x = app->player.position.x / 64;
 	y = app->player.position.y / 64;
-	if ((key == 100 || key == 65363) && matrix[y][x + 1] != '1')
+	if ((key == 100 || key == 65363) && matrix[y][x + 1] != '1' && matrix[y][x + 1] != 'E')
 		return (true);
-	else if ((key == 97 || key == 65361) && matrix[y][x - 1] != '1')
+	else if ((key == 97 || key == 65361) && matrix[y][x - 1] != '1' && matrix[y][x - 1] != 'E')
 		return (true);
-	else if ((key == 115 || key == 65364) && matrix[y + 1][x] != '1')
+	else if ((key == 115 || key == 65364) && matrix[y + 1][x] != '1' && matrix[y + 1][x] != 'E')
 		return (true);
-	else if ((key == 119 || key == 65362) && matrix[y - 1][x] != '1')
+	else if ((key == 119 || key == 65362) && matrix[y - 1][x] != '1' && matrix[y - 1][x] != 'E')
 		return (true);
 	return (false);
 }
@@ -98,6 +98,8 @@ int	control(int key, void *param)
 {
 	t_program *app;
 
+	if (key == 65307)
+		close_app(param);
 	app = (t_program *)param;
 	mlx_clear_window(app->mlx, app->window.reference);
 	if (move_is_allowed(app, key))

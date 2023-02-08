@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:04 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/07 20:37:47 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:04:33 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,6 @@ typedef	struct s_data
 	int endian;
 } t_data;
 
-// int mouse_event(int button, int x, int y, void *param)
-// {
-// 	printf("%d %d %d\n", button, x, y);
-// 	draw_square(mlx, win, 640 / 2, 360 / 2, 200, 100, 0xFFFFFF);
-//     // ft_putnbr(button);
-// 	// ft_putnbr(x);
-// 	// ft_putnbr(y);
-// }
-
-t_image ft_new_sprite(void *mlx, char *path)
-{
-	t_image img;
-	
-	/* mlx function that creates and image that contains the xmp file found in the given path.
-	* It also saves the width and height of the image in the pointers passed as parameters */
-	img.reference = mlx_xpm_file_to_image(mlx, path, &img.size.x, &img.size.y);
-	img.pixels  = mlx_get_data_addr(img.reference, &img.bits_per_pixel, &img.line_size, &img.endian);
-	return (img);
-}
 
 static void	draw_walls(t_program *app)
 {
@@ -154,14 +135,15 @@ static void	egg_animation(t_egg *egg)
 
 int	update(t_program *app)
 {
+	//mlx_clear_window(app->mlx, app->window.reference);
 	player_animation(&app->player);
 	egg_animation(&app->egg);
 	draw_walls(app);
 	draw_eggs(app);
 	draw_exit(app);
-	mlx_string_put(app->mlx, app->window.reference, app->window.size.x - 32, 32, 0xFFFFFF, ft_itoa(app->moves));
 	mlx_put_image_to_window(app->mlx, app->window.reference,
-	app->player.current_img, app->player.position.x, app->player.position.y);
+	 app->player.current_img, app->player.position.x, app->player.position.y);
+	//mlx_string_put(app->mlx, app->window.reference, app->window.size.x - 32, 32, 0xFFFFFF, ft_itoa(app->moves));
 	return (1);
 }
 
@@ -194,7 +176,10 @@ t_vector	get_player_position(t_map *map)
 
 void	imgs_setup(t_program *app)
 {
+
+	mlx_hook(app->window.reference, 17, 0, close_app, app);
 	app->egg.counter = 0;
+	app->player.counter = 0;
 	app->player.total_frames = 1500;
 	app->egg.total_frames = 1500;
 	app->player.position = get_player_position(&app->map);
@@ -234,7 +219,8 @@ int	main(int argc, char *argv[])
 	app.window = new_window(app.mlx, app.map.size.x * 64 + 64, app.map.size.y * 64, "so_long");
 	app.moves = 0;
 	imgs_setup(&app);
-	mlx_key_hook(app.window.reference, *control, &app);
+	//mlx_hook(app.window.reference, 2, 0, control,(void *)&app );
+	mlx_key_hook(app.window.reference, *control, (void *)&app);
 	mlx_loop_hook(app.mlx, update, (void *)&app);
 	mlx_loop(app.mlx);
 	}

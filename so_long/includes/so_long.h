@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/07 20:33:51 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:03:40 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		draw_square(t_program *app, int x, int y, int width, int height, int color
 t_bool		is_map_valid(char *str, t_map *map);
 int			main(int argc, char *argv[]);
 int			control(int key, void *param);
+int			close_app(void *param);
 
 
 

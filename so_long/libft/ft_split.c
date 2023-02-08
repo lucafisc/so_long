@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:46:28 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/01/16 15:02:37 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:19:38 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	count_words(char const *s, char c)
 
 int	is_new_word(char const *s, char c, int i)
 {
-	if ((s[i] != c && s[i - 1] == c) || (i == 0 && s[i] != c))
+	if ((i == 0 && s[i] != c) || (i > 0 && s[i] != c && s[i - 1] == c))
 		return (1);
 	return (0);
 }

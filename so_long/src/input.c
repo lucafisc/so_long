@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:54:15 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/07 21:25:07 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:14:37 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_map(char *str, t_map *map)
 	}
 	map->matrix = ft_split(all, '\n');
 	map->size = get_map_size(all);
-	//free(all);
+	free(all);
 }
 
 t_bool	has_char(t_map *map, char c)
@@ -106,14 +106,70 @@ t_bool	has_only_one(t_map *map, char c)
 		return (false);
 }
 
+t_bool	is_rectangular(t_map *map)
+{
+	int		i;
+	int		j;
+	char	**matrix;
+
+	matrix = map->matrix;
+	i = 0;
+	j = 0;
+	while (matrix[i])
+	{
+		while (matrix[i][j])
+		{
+			j++;
+		}
+		if (j != map->size.x)
+			return (false);
+		i++;
+		j = 0;
+	}
+	if (i != map->size.y)
+		return (false);
+	else
+		return (true);
+}
+
+t_bool	has_walls(t_map *map)
+{	
+	int		i;
+	int		j;
+	char	**matrix;
+
+	matrix = map->matrix;
+	i = 1;
+	j = 0;
+	
+	while (j < map->size.x)
+	{
+		if (matrix[0][j] != '1')
+			return (false);
+		j++;
+	}
+	while (i < map->size.y - 1)
+	{
+		if (matrix[i][0] != '1' || matrix[i][map->size.x - 1] != '1')
+			return (false);
+		i++;
+	}
+	j = 0;
+	while (matrix[i][j])
+	{
+		if (matrix[i][j] != '1')
+			return (false);
+		j++;
+	}
+	return (true);	
+}
+
 t_bool	is_map_valid(char *str, t_map *map)
 {
 	if (!ft_strnstr(str, ".ber", ft_strlen(str)))
 		return (false);
 	get_map(str, map);
-	if (!has_char(map, 'C') || !has_char(map, 'E') || !has_char(map, 'P'))
-		return (false);
-	if (!has_only_one(map, 'E') || !has_only_one(map, 'P'))
+	if (!has_char(map, 'C') || !has_char(map, 'E') || !has_char(map, 'P') || !has_only_one(map, 'E') || !has_only_one(map, 'P') || !is_rectangular(map) || !has_walls(map))
 		return (false);
 	return (true);
 }
