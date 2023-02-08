@@ -1,12 +1,12 @@
-SRC = ./src/main.c ./src/init.c ./src/draw_square.c ./src/control.c ./src/window.c ./src/input.c ./src/errors.c ./src/map.c
+SRC = ./src/main.c ./src/init.c ./src/draw_square.c ./src/control.c ./src/window.c ./src/input.c ./src/errors.c ./src/map.c ./src/animation.c
 OBJ = ${SRC:.c=.o}
 CC = cc
-CFLAGS = -Wall -Wextra -Ofast
+CFLAGS = -Wall -Wextra -Werror -Ofast -g
 NAME = so_long
 LIBFT = libft/libft.a
 PRINTF = ft_printf/ft_printf.a
 INCLUDES = -I ft_printf/includes -I libft/includes
-MINILIBX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MINILIBX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -opengl
 
 all: $(NAME)
 

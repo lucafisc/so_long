@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:27:24 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 18:54:13 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:47:52 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,22 @@ int	close_app(void *param)
 
 	app = (t_program *)param;
 
-	// mlx_destroy_image(app->mlx, app->player.player_img_1);
-	// mlx_destroy_image(app->mlx, app->player.player_img_2);
-	// mlx_destroy_image(app->mlx, app->player.current_img);
-	// mlx_destroy_image(app->mlx, app->egg.egg_img_1);
-	// mlx_destroy_image(app->mlx, app->egg.egg_img_2);
-	// mlx_destroy_image(app->mlx, app->egg.egg_img_3);
-	// mlx_destroy_image(app->mlx, app->egg.current_img);
-	// mlx_destroy_image(app->mlx, app->wall.wall_img_1);
-	// mlx_destroy_image(app->mlx, app->wall.wall_img_2);
-	// mlx_destroy_image(app->mlx, app->exit.exit_closed_img);
-	// mlx_destroy_image(app->mlx, app->exit.exit_open_img);
+	app->player.current_img = NULL;
+	app->egg.current_img = NULL;
+	mlx_destroy_image(app->mlx, app->player.player_img_1);
+	mlx_destroy_image(app->mlx, app->player.player_img_2);
+	mlx_destroy_image(app->mlx, app->egg.egg_img_1);
+	mlx_destroy_image(app->mlx, app->egg.egg_img_2);
+	mlx_destroy_image(app->mlx, app->egg.egg_img_3);
+	mlx_destroy_image(app->mlx, app->wall.wall_img_1);
+	mlx_destroy_image(app->mlx, app->wall.wall_img_2);
+	mlx_destroy_image(app->mlx, app->wall.frame_img);
+	mlx_destroy_image(app->mlx, app->exit.exit_closed_img);
+	mlx_destroy_image(app->mlx, app->exit.exit_open_img);
+	free_map(&app->map);
 	mlx_destroy_window(app->mlx, app->window.reference);
-	//free(app->mlx);
+	mlx_destroy_display(app->mlx);
+	free(app->mlx);
 	exit(0);
 	return ((*(int*)param));
 }

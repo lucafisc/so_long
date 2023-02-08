@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:04 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 19:21:15 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:14:43 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,14 @@ static void	draw_walls(t_program *app)
 					mlx_put_image_to_window(app->mlx, app->window.reference,
 					app->wall.wall_img_2, j * app->img_size, i * app->img_size);
 				else
-					mlx_put_image_to_window(app->mlx, app->window.reference,
-					app->wall.wall_img_1, j * app->img_size, i * app->img_size);
+				{
+					if (i == 0 && j == 0)
+						mlx_put_image_to_window(app->mlx, app->window.reference,
+						app->wall.frame_img, j * app->img_size, i * app->img_size);
+					else
+						mlx_put_image_to_window(app->mlx, app->window.reference,
+						app->wall.wall_img_1, j * app->img_size, i * app->img_size);
+				}
 			}
 			j++;
 		}
@@ -95,7 +101,7 @@ static void	draw_exit(t_program *app)
 				app->exit.exit_closed_img, j * app->img_size, i * app->img_size);
 				return ;
 			}
-				if (matrix[i][j] == 'e')
+			if (matrix[i][j] == 'e')
 			{
 				mlx_put_image_to_window(app->mlx, app->window.reference,
 				app->exit.exit_open_img, j * app->img_size, i * app->img_size);
@@ -108,34 +114,11 @@ static void	draw_exit(t_program *app)
 	}
 }
 
-static void	player_animation(t_player *player)
-{
-	if (player->counter > player->total_frames)
-		player->current_img = player->player_img_1;
-	else
-		player->current_img = player->player_img_2;
-	if (player->counter > player->total_frames * 2)
-		player->counter = 0;
-	player->counter += 1;
-}
-
-static void	egg_animation(t_egg *egg)
-{
-	if (egg->counter < egg->total_frames / 3)
-		egg->current_img = egg->egg_img_1;
-	else if (egg->counter <  egg->total_frames / 3 * 2)
-		egg->current_img = egg->egg_img_2;
-	else
-		egg->current_img = egg->egg_img_3;
-	if (egg->counter > egg->total_frames)
-		egg->counter = 0;
-	egg->counter += 1;
-	
-}
-
 int	update(t_program *app)
 {
-	//mlx_clear_window(app->mlx, app->window.reference);
+	char	*moves;
+
+	moves = ft_itoa(app->moves);
 	player_animation(&app->player);
 	egg_animation(&app->egg);
 	draw_walls(app);
@@ -143,7 +126,8 @@ int	update(t_program *app)
 	draw_exit(app);
 	mlx_put_image_to_window(app->mlx, app->window.reference,
 	 app->player.current_img, app->player.position.x, app->player.position.y);
-	//mlx_string_put(app->mlx, app->window.reference, app->window.size.x - 32, 32, 0xFFFFFF, ft_itoa(app->moves));
+	mlx_string_put(app->mlx, app->window.reference, app->img_size / 2 - 2, app->img_size / 2, 0xFFFFFF, moves);
+	free(moves);
 	return (1);
 }
 

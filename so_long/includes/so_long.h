@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 19:04:27 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:46:55 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_wall
 {
 	void	*wall_img_1;
 	void	*wall_img_2;
+	void	*frame_img;
 }	t_wall;
 
 typedef struct s_map
@@ -130,5 +131,8 @@ t_vector	get_map_size(char *str);
 void		free_map(t_map *map);
 void		get_map(char *str, t_map *map);
 
+//animation
+void	player_animation(t_player *player);
+void	egg_animation(t_egg *egg);
 
 #endif

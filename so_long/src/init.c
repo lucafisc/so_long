@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:59:17 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 19:22:41 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:09:21 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_vector	get_player_position(t_program *app)
 	
 	i = 0;
 	j = 0;
+	position.x = -1;
+	position.y = -1;
 	matrix = app->map.matrix;
 	while (matrix[i])
 	{
@@ -37,6 +39,7 @@ t_vector	get_player_position(t_program *app)
 		j = 0;
 		i++;
 	}
+	return (position);
 }
 
 void	game_setup(t_program *app)
@@ -60,22 +63,24 @@ void	imgs_setup(t_program *app)
 		"sprites/wall1.xpm", &app->img_size, &app->img_size);
 	app->wall.wall_img_2 = mlx_xpm_file_to_image(app->mlx,
 		"sprites/wall2.xpm", &app->img_size, &app->img_size);
+	app->wall.frame_img = mlx_xpm_file_to_image(app->mlx,
+		"sprites/frame.xpm", &app->img_size, &app->img_size);
 	app->egg.egg_img_1 = mlx_xpm_file_to_image(app->mlx,
 		"sprites/egg1.xpm", &app->img_size, &app->img_size);
 	app->egg.egg_img_2 = mlx_xpm_file_to_image(app->mlx,
 		"sprites/egg2.xpm", &app->img_size, &app->img_size);
 	app->egg.egg_img_3 = mlx_xpm_file_to_image(app->mlx,
 		"sprites/egg3.xpm", &app->img_size, &app->img_size);
-	app->exit.exit_open_img = mlx_xpm_file_to_image(app->mlx,
-		"sprites/exitopen.xpm", &app->img_size, &app->img_size);
 	app->exit.exit_closed_img = mlx_xpm_file_to_image(app->mlx,
 		"sprites/exitclosed.xpm", &app->img_size, &app->img_size);
+	app->exit.exit_open_img = mlx_xpm_file_to_image(app->mlx,
+		"sprites/exitopen.xpm", &app->img_size, &app->img_size);
 }
 
 void	init_game(t_program *app)
 {
 	game_setup(app);
 	app->mlx = mlx_init();
-	app->window = new_window(app->mlx, app->map.size.x * app->img_size + app->img_size , app->map.size.y * app->img_size , "so_long");
+	app->window = new_window(app->mlx, app->map.size.x * app->img_size, app->map.size.y * app->img_size , "so_long");
 	imgs_setup(app);
 }
