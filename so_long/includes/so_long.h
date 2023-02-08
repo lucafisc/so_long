@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 15:03:40 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:04:27 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_wall
 typedef struct s_map
 {
 	t_vector	size;
+	t_bool		allocated;
 	char		**matrix;
 }	t_map;
 
@@ -111,13 +112,23 @@ void		ft_putchar(char c);
 void		hooks(t_program *app);
 t_window	new_window(void *mlx, int widht, int height, char *name);
 void		draw_square(t_program *app, int x, int y, int width, int height, int color);
-t_bool		is_map_valid(char *str, t_map *map);
+t_bool		map_is_valid(char *str, t_map *map);
 int			main(int argc, char *argv[]);
 int			control(int key, void *param);
 int			close_app(void *param);
 
 
+//init
+void	init_game(t_program *app);
 
+//errors
+void		invalid_map(t_map *map);
+void		invalid_args(char *str);
+
+//map
+t_vector	get_map_size(char *str);
+void		free_map(t_map *map);
+void		get_map(char *str, t_map *map);
 
 
 #endif

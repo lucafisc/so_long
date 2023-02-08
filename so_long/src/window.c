@@ -6,27 +6,11 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:27:24 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 18:03:13 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:54:13 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-void	free_map(t_map *map)
-{
-	int	i;
-	char **matrix;
-
-	i = 0;
-	matrix = map->matrix;
-	while (i < map->size.y)
-	{
-		free(matrix[i]);
-		i++;
-	}
-	//free(matrix[i]);
-	free(matrix);
-}
 
 int	close_app(void *param)
 {

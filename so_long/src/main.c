@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:04 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 18:04:33 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:21:15 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,82 +147,21 @@ int	update(t_program *app)
 	return (1);
 }
 
-t_vector	get_player_position(t_map *map)
-{
-	t_vector position;
-	int	i;
-	int	j;
-	char **matrix;
-	
-	i = 0;
-	j = 0;
-	matrix = map->matrix;
-	while (matrix[i])
-	{
-		while (matrix[i][j])
-		{
-			if (matrix[i][j] == 'P')
-			{
-				position.x = j * 64;
-				position.y = i * 64;
-				return (position);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}
-
-void	imgs_setup(t_program *app)
-{
-
-	mlx_hook(app->window.reference, 17, 0, close_app, app);
-	app->egg.counter = 0;
-	app->player.counter = 0;
-	app->player.total_frames = 1500;
-	app->egg.total_frames = 1500;
-	app->player.position = get_player_position(&app->map);
-	app->img_size = 64;
-	app->player.player_img_1 = mlx_xpm_file_to_image(app->mlx,
-			"sprites/player01.xpm", &app->img_size, &app->img_size);
-	app->player.player_img_2 = mlx_xpm_file_to_image(app->mlx,
-			"sprites/player02.xpm", &app->img_size, &app->img_size);
-	app->wall.wall_img_1 = mlx_xpm_file_to_image(app->mlx,
-	"sprites/wall1.xpm", &app->img_size, &app->img_size);
-	app->wall.wall_img_2 = mlx_xpm_file_to_image(app->mlx,
-	"sprites/wall2.xpm", &app->img_size, &app->img_size);
-	app->egg.egg_img_1 = mlx_xpm_file_to_image(app->mlx,
-	"sprites/egg1.xpm", &app->img_size, &app->img_size);
-	app->egg.egg_img_2 = mlx_xpm_file_to_image(app->mlx,
-	"sprites/egg2.xpm", &app->img_size, &app->img_size);
-	app->egg.egg_img_3 = mlx_xpm_file_to_image(app->mlx,
-	"sprites/egg3.xpm", &app->img_size, &app->img_size);
-	app->exit.exit_open_img = mlx_xpm_file_to_image(app->mlx,
-	"sprites/exitopen.xpm", &app->img_size, &app->img_size);
-	app->exit.exit_closed_img = mlx_xpm_file_to_image(app->mlx,
-	"sprites/exitclosed.xpm", &app->img_size, &app->img_size);
-}
-
-
 int	main(int argc, char *argv[])
 {
 	t_program	app;
 
 	if (argc != 2)
-		ft_printf(BRED"Error\nTry ./%s <map.ber>\n", argv[0], COLOR_RESET);
-	else if (!is_map_valid(argv[1], &app.map))
-		ft_printf(BRED"Error\nInvalid map\n", COLOR_RESET);
+		invalid_args(argv[0]);
+	else if (!map_is_valid(argv[1], &app.map))
+		invalid_map(&app.map);
 	else
 	{
-	app.mlx = mlx_init();
-	app.window = new_window(app.mlx, app.map.size.x * 64 + 64, app.map.size.y * 64, "so_long");
-	app.moves = 0;
-	imgs_setup(&app);
-	//mlx_hook(app.window.reference, 2, 0, control,(void *)&app );
-	mlx_key_hook(app.window.reference, *control, (void *)&app);
-	mlx_loop_hook(app.mlx, update, (void *)&app);
-	mlx_loop(app.mlx);
+		init_game(&app);
+		mlx_hook(app.window.reference, 17, 0, close_app, (void *)&app);
+		mlx_key_hook(app.window.reference, *control, (void *)&app);
+		mlx_loop_hook(app.mlx, update, (void *)&app);
+		mlx_loop(app.mlx);
 	}
 	return (0);
 }
