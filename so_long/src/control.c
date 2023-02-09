@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:45:36 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 17:52:49 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:34:14 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_bool	move_is_allowed(t_program *app, int	key)
 	matrix = app->map.matrix;
 	x = app->player.position.x / 64;
 	y = app->player.position.y / 64;
-	if ((key == 100 || key == 65363) && matrix[y][x + 1] != '1' && matrix[y][x + 1] != 'E')
+	if (app->finish)
+		return (false);
+	else if ((key == 100 || key == 65363) && matrix[y][x + 1] != '1' && matrix[y][x + 1] != 'E')
 		return (true);
 	else if ((key == 97 || key == 65361) && matrix[y][x - 1] != '1' && matrix[y][x - 1] != 'E')
 		return (true);
@@ -92,6 +94,7 @@ void	open_exit(t_program *app)
 		i++;
 		j = 0;
 	}
+	app->collected = true;
 }
 
 int	control(int key, void *param)
@@ -113,8 +116,6 @@ int	control(int key, void *param)
 		else if (key == 119 || key == 65362)
 			app->player.position.y -= app->img_size;
 		collect_egg(app);
-		if (all_eggs_collected(app))
-			open_exit(app);
 		app->moves += 1;
 	}
 	return (0);

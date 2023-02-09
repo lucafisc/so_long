@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 20:46:55 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:42:16 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,16 @@ typedef struct s_egg
 	int		total_frames;
 }	t_egg;
 
+typedef struct s_heart
+{
+	void	*current_img;
+	void	*heart_img_1;
+	void	*heart_img_2;
+	void	*heart_img_3;
+	int		counter;
+	int		total_frames;
+}	t_heart;
+
 typedef struct s_wall
 {
 	void	*wall_img_1;
@@ -93,6 +103,7 @@ typedef struct s_exit
 {
 	void	*exit_closed_img;
 	void	*exit_open_img;
+	t_vector	exit_vector;
 } t_exit;
 
 
@@ -105,7 +116,10 @@ typedef struct	s_program {
 	t_egg		egg;
 	t_wall		wall;
 	t_exit		exit;
+	t_heart		heart;
 	int			moves;
+	t_bool		finish;
+	t_bool		collected;
 }				t_program;
 
 void		ft_putnbr(int n);
@@ -132,7 +146,13 @@ void		free_map(t_map *map);
 void		get_map(char *str, t_map *map);
 
 //animation
-void	player_animation(t_player *player);
+void	player_animation(t_program *app);
 void	egg_animation(t_egg *egg);
+void	heart_animation(t_heart *heart);
+
+
+void	open_exit(t_program *app);
+t_bool	all_eggs_collected(t_program *app);
+
 
 #endif
