@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 17:14:03 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:06:42 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,37 @@ void	init_game(t_program *app);
 void		invalid_map(t_map *map);
 void		invalid_args(char *str);
 
-//map
+//map_utils
+t_vector	get_player_position(t_program *app);
+t_vector	get_exit_position(t_program *app);
 t_vector	get_map_size(char *str);
 void		free_map(t_map *map);
 void		get_map(char *str, t_map *map);
+
+//map_mod
+void	collect(t_program *app);
+void	open_exit(t_program *app);
+void	place_enemy(t_program *app);
+
+//update
+int	update(t_program *app);
+
+//render
+void	draw_exit(t_program *app);
+void	draw_hearts(t_program *app);
+void	draw_enemy(t_program *app);
+void	draw_eggs(t_program *app);
+void	draw_walls(t_program *app);
+
+void	move_enemy(t_program *app);
+
+//game checkers
+void	has_won(t_program *app);
+t_bool	has_lost(t_program *app);
+t_bool	collected_all(t_program *app);
+t_bool	move_is_allowed(t_program *app, int	key);
+
+
 
 //animation
 void	player_animation(t_program *app);
@@ -163,7 +190,6 @@ void	enemy_animation(t_program *app);
 
 
 void	open_exit(t_program *app);
-t_bool	all_eggs_collected(t_program *app);
 
 int random_number(void);
 

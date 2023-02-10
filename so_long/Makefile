@@ -1,4 +1,4 @@
-SRC = ./src/main.c ./src/init.c ./src/draw_square.c ./src/control.c ./src/window.c ./src/input.c ./src/errors.c ./src/map.c ./src/animation.c
+SRC = ./src/main.c ./src/init.c ./src/update.c ./src/game_checkers.c ./src/close.c ./src/render.c ./src/control.c ./src/utils.c ./src/input_checkers.c ./src/errors.c ./src/map_utils.c  ./src/map_mod.c ./src/animation.c
 OBJ = ${SRC:.c=.o}
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ofast -g

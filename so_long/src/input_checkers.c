@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   input_checkers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:54:15 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 18:57:52 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:08:05 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,29 +94,25 @@ t_bool	has_walls(t_map *map)
 	char	**matrix;
 
 	matrix = map->matrix;
-	i = 1;
-	j = 0;
-	
-	while (j < map->size.x)
+	i = 0;
+	j = -1;
+	while (++j < map->size.x)
 	{
 		if (matrix[0][j] != '1')
 			return (false);
-		j++;
 	}
-	while (i < map->size.y - 1)
+	while (++i < map->size.y - 1)
 	{
 		if (matrix[i][0] != '1' || matrix[i][map->size.x - 1] != '1')
 			return (false);
-		i++;
 	}
-	j = 0;
-	while (matrix[i][j])
+	j = -1;
+	while (matrix[i][++j])
 	{
 		if (matrix[i][j] != '1')
 			return (false);
-		j++;
 	}
-	return (true);	
+	return (true);
 }
 
 t_bool	map_is_valid(char *str, t_map *map)
@@ -125,8 +121,9 @@ t_bool	map_is_valid(char *str, t_map *map)
 	if (!ft_strnstr(str, ".ber", ft_strlen(str)))
 		return (false);
 	get_map(str, map);
-	if (!map->allocated || !has_char(map, 'C') || !has_char(map, 'E') || !has_char(map, 'P')
-		|| !has_only_one(map, 'E') || !has_only_one(map, 'P') || !is_rectangular(map) || !has_walls(map))
+	if (!map->allocated || !has_char(map, 'C') || !has_char(map, 'E')
+		|| !has_char(map, 'P') || !has_only_one(map, 'E')
+		|| !has_only_one(map, 'P') || !is_rectangular(map) || !has_walls(map))
 		return (false);
 	return (true);
 }

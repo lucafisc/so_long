@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_square.c                                      :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 14:52:47 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/04 17:35:39 by lde-ross         ###   ########.fr       */
+/*   Created: 2023/02/04 17:27:24 by lde-ross          #+#    #+#             */
+/*   Updated: 2023/02/10 19:17:24 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	draw_square(t_program *app, int x, int y, int width, int height, int color)
+int	random_number(void)
 {
-	int	save_x;
-	int	save_y;
+	static unsigned int	i = 1;
 
-	save_y = y;
-	save_x = x;
-	while (x++ < width + save_x)
-	{
-		while (y++ < height + save_y)
-			mlx_pixel_put(app->mlx, app->window.reference, x, y, color);
-		y = save_y;
-	}
+	i = 1103515245 * i + 12345;
+	return ((unsigned int)(i / 65536) % 32768 % 4);
+}
+
+t_window	new_window(void *mlx, int widht, int height, char *name)
+{
+	t_window	window;
+
+	window.reference = mlx_new_window(mlx, widht, height, name);
+	window.size.x = widht;
+	window.size.y = height;
+	return (window);
 }

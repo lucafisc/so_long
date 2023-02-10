@@ -1,16 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:53:22 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/08 18:54:45 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 19:18:42 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+t_vector	get_player_position(t_program *app)
+{
+	int			i;
+	int			j;
+	char		**matrix;
+	t_vector	position;
+
+	i = -1;
+	j = -1;
+	position.x = -1;
+	position.y = -1;
+	matrix = app->map.matrix;
+	while (matrix[++i])
+	{
+		while (matrix[i][++j])
+		{
+			if (matrix[i][j] == 'P')
+			{
+				position.x = j;
+				position.y = i;
+				matrix[i][j] = '0';
+				return (position);
+			}
+		}
+		j = 0;
+	}
+	return (position);
+}
+
+t_vector	get_exit_position(t_program *app)
+{
+	t_vector	vector;
+	char		**matrix;
+
+	matrix = app->map.matrix;
+	vector.y = 0;
+	vector.x = 0;
+	while (matrix[vector.y])
+	{
+		while (matrix[vector.y][vector.x])
+		{
+			if (matrix[vector.y][vector.x] == 'E')
+			{
+				return (vector);
+			}
+			vector.x++;
+		}
+		vector.y++;
+		vector.x = 0;
+	}
+	return (vector);
+}
 
 t_vector	get_map_size(char *str)
 {
@@ -72,6 +125,5 @@ void	free_map(t_map *map)
 		free(matrix[i]);
 		i++;
 	}
-	//free(matrix[i]);
 	free(matrix);
 }
