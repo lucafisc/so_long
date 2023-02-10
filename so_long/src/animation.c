@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:34:51 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/09 22:46:41 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:41:42 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ void	player_animation(t_program *app)
 	app->player.counter += 1;
 	mlx_put_image_to_window(app->mlx, app->window.reference,
 	 app->player.current_img, app->player.position.x, app->player.position.y);
+}
+
+void	enemy_animation(t_program *app)
+{
+
+	if (app->enemy.counter > app->enemy.total_frames)
+		app->enemy.current_img = app->enemy.enemy_img_1;
+	else
+		app->enemy.current_img = app->enemy.enemy_img_2;
+	if (app->enemy.counter > app->enemy.total_frames * 2)
+		app->enemy.counter = 0;
+	app->enemy.counter += 1;
 }
 
 void	egg_animation(t_egg *egg)

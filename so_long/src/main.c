@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:04 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/09 22:52:25 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:13:54 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,48 @@ static void	draw_eggs(t_program *app)
 	}
 }
 
+void	move_enemy(t_program *app)
+{
+	char **matrix;
+	int	move;
+	
+	move = random_number();
+	matrix = app->map.matrix;
+	if (move == 0 && matrix[app->enemy.position.y][app->enemy.position.x + 1] == '0')
+	{
+		app->enemy.position.x++;
+	}
+	else if (move == 1 && matrix[app->enemy.position.y][app->enemy.position.x - 1] == '0')
+	{
+		app->enemy.position.x--;
+	}
+	else if (move == 2 && matrix[app->enemy.position.y + 1][app->enemy.position.x] == '0')
+	{
+		app->enemy.position.y++;
+	}
+	else if (move == 3 && matrix[app->enemy.position.y - 1][app->enemy.position.x] == '0')
+	{
+		app->enemy.position.y--;
+	}
+	else
+		move_enemy(app);
+}
+
+static void	draw_enemy(t_program *app)
+{
+	static int	move = 1000;
+	
+	if (move < 0)
+	{
+		move_enemy(app);
+			mlx_clear_window(app->mlx, app->window.reference);
+		move = 1000;
+	}
+	move--;
+	mlx_put_image_to_window(app->mlx, app->window.reference,
+		app->enemy.current_img, app->enemy.position.x * app->img_size, app->enemy.position.y * app->img_size);
+}
+
 static void	draw_hearts(t_program *app)
 {
 	int	i;
@@ -95,7 +137,7 @@ static void	draw_hearts(t_program *app)
 	{
 		while (matrix[i][j])
 		{
-			if (i != app->exit.exit_vector.x || j != app->exit.exit_vector.y)
+			if (i != app->exit.exit_vector.y || j != app->exit.exit_vector.x)
 			{
 				mlx_put_image_to_window(app->mlx, app->window.reference,
 				app->heart.current_img, j * app->img_size, i * app->img_size);
@@ -117,12 +159,12 @@ static void	draw_exit(t_program *app)
 	if (app->collected)
 	{
 		mlx_put_image_to_window(app->mlx, app->window.reference,
-		app->exit.exit_open_img, vector.y * app->img_size, vector.x * app->img_size);
+		app->exit.exit_open_img, vector.x * app->img_size, vector.y * app->img_size);
 	}
 	else
 	{
 		mlx_put_image_to_window(app->mlx, app->window.reference,
-		app->exit.exit_closed_img, vector.y * app->img_size, vector.x * app->img_size);
+		app->exit.exit_closed_img, vector.x * app->img_size, vector.y * app->img_size);
 	}
 		return ;
 }
@@ -134,17 +176,48 @@ void	finish_game(t_program *app)
 
 void	check_finish(t_program *app)
 {
-	if (app->player.position.y / app->img_size == app->exit.exit_vector.x && app->player.position.x / app->img_size == app->exit.exit_vector.y)
+	if (app->player.position.y / app->img_size == app->exit.exit_vector.y && app->player.position.x / app->img_size == app->exit.exit_vector.x)
 		app->finish = true;
 	if (all_eggs_collected(app))
 		open_exit(app);
 
 }
 
-int random_number() {
+int random_number(void) {
     static unsigned int seed = 1;
     seed = 1103515245 * seed + 12345;
     return (unsigned int)(seed / 65536) % 32768 % 4;
+}
+
+void	print_matrix(t_program *app)
+{
+		int	i;
+	int	j;
+	char **matrix;
+
+	i = 0;
+	j = 0;
+	matrix = (*app).map.matrix;
+	while (matrix[i])
+	{
+		while (matrix[i][j])
+		{
+			ft_printf("%c", matrix[i][j]);
+			j++;
+		}
+		j = 0;
+		ft_printf("\n");
+		i++;
+	}
+	ft_printf("\n\n\n");
+}
+
+t_bool	game_over(t_program *app)
+{
+	if (app->enemy.position.x == app->player.position.x / 64 && app->enemy.position.y == app->player.position.y / 64)
+		return (true);
+	return (false);
+
 }
 
 int	update(t_program *app)
@@ -153,14 +226,21 @@ int	update(t_program *app)
 
 	check_finish(app);	
 	player_animation(app);
-	if (!app->finish)
+	ft_printf("enemy x: %d enemy y: %d\n", app->enemy.position.x, app->enemy.position.y);
+	ft_printf("player x: %d player y: %d\n", app->player.position.x, app->player.position.y);
+	if (game_over(app))
+		close_app(app);
+	else if (!app->finish)
 	{
 		moves = ft_itoa(app->moves);
 		egg_animation(&app->egg);
+		enemy_animation(app);
 		draw_walls(app);
 		draw_exit(app);
 		draw_eggs(app);
+		draw_enemy(app);
 		mlx_string_put(app->mlx, app->window.reference, app->img_size / 2 - 2, app->img_size / 2, 0xFFFFFF, moves);
+		//print_matrix(app);
 		free(moves);
 	}
 	else

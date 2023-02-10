@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:45:36 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/09 22:34:14 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:12:25 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,12 @@ void	open_exit(t_program *app)
 int	control(int key, void *param)
 {
 	t_program *app;
+	char	**matrix;
 
 	if (key == 65307)
 		close_app(param);
 	app = (t_program *)param;
+	matrix = app->map.matrix;
 	mlx_clear_window(app->mlx, app->window.reference);
 	if (move_is_allowed(app, key))
 	{	

@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:59:17 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/09 22:43:10 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:52:28 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_vector	get_player_position(t_program *app)
 			{
 				position.x = j * app->img_size;
 				position.y = i * app->img_size;
+				matrix[i][j] = '0';
 				return (position);
 			}
 			j++;
@@ -66,14 +67,46 @@ t_vector	get_exit_vector(t_program *app)
 	return (vector);
 }
 
+void	place_enemy(t_program *app)
+{
+	char	**matrix;
+	static	int	i = 1;
 
+	matrix = app->map.matrix;
+	if (matrix[app->exit.exit_vector.y][app->exit.exit_vector.x + 1] == '0')
+	{
+		app->enemy.position.y = app->exit.exit_vector.y;
+		app->enemy.position.x = app->exit.exit_vector.x + 1;
+	}
+	else if (matrix[app->exit.exit_vector.y][app->exit.exit_vector.x - 1] == '0')
+	{
+		app->enemy.position.y = app->exit.exit_vector.y;
+		app->enemy.position.x = app->exit.exit_vector.x - 1;
+	}
+	else if (matrix[app->exit.exit_vector.y + 1][app->exit.exit_vector.x ] == '0')
+	{
+		app->enemy.position.y = app->exit.exit_vector.y + 1;
+		app->enemy.position.x = app->exit.exit_vector.x ;
+	}
+	else if (matrix[app->exit.exit_vector.y - 1][app->exit.exit_vector.x ] == '0')
+	{
+		app->enemy.position.y = app->exit.exit_vector.y - 1;
+		app->enemy.position.x = app->exit.exit_vector.x ;
+	}
+	else
+	{
+		i++;
+		place_enemy(app);
+	}
+}
 
 void	game_setup(t_program *app)
 {
 	app->finish = false;
 	app->collected = false;
 	app->exit.exit_vector = get_exit_vector(app);
-	ft_printf("y: %d x: %d\n", app->exit.exit_vector.y, app->exit.exit_vector.x);
+	ft_printf("exit coordinates x: %d y: %d\n", app->exit.exit_vector.x, app->exit.exit_vector.y);
+	ft_printf("%c\n", app->map.matrix[app->exit.exit_vector.y][app->exit.exit_vector.x]);
 	app->moves = 0;
 	app->img_size = 64;
 	app->egg.counter = 0;
@@ -83,6 +116,9 @@ void	game_setup(t_program *app)
 	app->player.position = get_player_position(app);
 	app->heart.counter = 0;
 	app->heart.total_frames = 1500;
+	app->enemy.counter = 0;
+	app->enemy.total_frames = 1500;
+	place_enemy(app);
 }
 
 void	imgs_setup(t_program *app)
@@ -113,6 +149,10 @@ void	imgs_setup(t_program *app)
 		"sprites/heart2.xpm", &app->img_size, &app->img_size);
 	app->heart.heart_img_3 = mlx_xpm_file_to_image(app->mlx,
 		"sprites/heart3.xpm", &app->img_size, &app->img_size);
+	app->enemy.enemy_img_1 = mlx_xpm_file_to_image(app->mlx,
+		"sprites/cat1.xpm", &app->img_size, &app->img_size);
+	app->enemy.enemy_img_2 = mlx_xpm_file_to_image(app->mlx,
+		"sprites/cat2.xpm", &app->img_size, &app->img_size);
 }
 
 void	init_game(t_program *app)

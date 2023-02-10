@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/09 22:42:16 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:14:03 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,15 @@ typedef struct s_exit
 	t_vector	exit_vector;
 } t_exit;
 
+typedef struct s_enemy
+{
+	void		*current_img;
+	void		*enemy_img_1;
+	void		*enemy_img_2;
+	int			counter;
+	int			total_frames;
+	t_vector	position;
+}	t_enemy;
 
 typedef struct	s_program {
 	void		*mlx;
@@ -120,6 +129,7 @@ typedef struct	s_program {
 	int			moves;
 	t_bool		finish;
 	t_bool		collected;
+	t_enemy		enemy;
 }				t_program;
 
 void		ft_putnbr(int n);
@@ -149,10 +159,12 @@ void		get_map(char *str, t_map *map);
 void	player_animation(t_program *app);
 void	egg_animation(t_egg *egg);
 void	heart_animation(t_heart *heart);
+void	enemy_animation(t_program *app);
 
 
 void	open_exit(t_program *app);
 t_bool	all_eggs_collected(t_program *app);
 
+int random_number(void);
 
 #endif

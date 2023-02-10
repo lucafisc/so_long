@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:27:24 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/09 22:37:34 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:42:13 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	close_app(void *param)
 	mlx_destroy_image(app->mlx, app->heart.heart_img_1);
 	mlx_destroy_image(app->mlx, app->heart.heart_img_2);
 	mlx_destroy_image(app->mlx, app->heart.heart_img_3);
+	mlx_destroy_image(app->mlx, app->enemy.enemy_img_1);
+	mlx_destroy_image(app->mlx, app->enemy.enemy_img_2);
 	free_map(&app->map);
 	mlx_destroy_window(app->mlx, app->window.reference);
 	mlx_destroy_display(app->mlx);
