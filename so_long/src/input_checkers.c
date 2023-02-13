@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:54:15 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 18:08:05 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:27:45 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ t_bool	map_is_valid(char *str, t_map *map)
 	get_map(str, map);
 	if (!map->allocated || !has_char(map, 'C') || !has_char(map, 'E')
 		|| !has_char(map, 'P') || !has_only_one(map, 'E')
-		|| !has_only_one(map, 'P') || !is_rectangular(map) || !has_walls(map))
+		|| !has_only_one(map, 'P') || !is_rectangular(map) || !has_walls(map)
+		|| has_invalid_char(map) || has_closed_path(map))
 		return (false);
 	return (true);
 }

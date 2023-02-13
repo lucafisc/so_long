@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:18:05 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 19:10:01 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:42:40 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,7 @@ void	draw_walls(t_program *app)
 		while (matrix[i][j])
 		{
 			if (matrix[i][j] == '1')
-			{
-				if ((*app).map.size.y == i + 1 || matrix[i + 1][j] != '1')
-					mlx_put_image_to_window(app->mlx, app->window.reference,
-						app->wall.wall_img_2, j * app->img_size,
-						i * app->img_size);
-				else
-				{
-					if (i == 0 && j == 0)
-						mlx_put_image_to_window(app->mlx, app->window.reference,
-							app->wall.frame_img, j * app->img_size,
-							i * app->img_size);
-					else
-						mlx_put_image_to_window(app->mlx, app->window.reference,
-							app->wall.wall_img_1, j * app->img_size,
-							i * app->img_size);
-				}
-			}
+				draw_borders(app, i, j);
 			j++;
 		}
 		j = 0;
@@ -63,7 +47,7 @@ void	draw_eggs(t_program *app)
 	{
 		while (matrix[i][j])
 		{
-			if (matrix[i][j] == 'C')
+			if (matrix[i][j] == 'c')
 			{
 				mlx_put_image_to_window(app->mlx, app->window.reference,
 					app->egg.current_img, j * app->img_size, i * app->img_size);

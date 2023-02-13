@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:34:51 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 17:50:43 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:42:55 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,26 @@ void	heart_animation(t_heart *heart)
 	if (heart->counter > heart->total_frames)
 		heart->counter = 0;
 	heart->counter += 1;
+}
+
+void	draw_borders(t_program *app, int i, int j)
+{
+	char	**matrix;
+
+	matrix = (*app).map.matrix;
+	if ((*app).map.size.y == i + 1 || matrix[i + 1][j] != '1')
+		mlx_put_image_to_window(app->mlx, app->window.reference,
+			app->wall.wall_img_2, j * app->img_size,
+			i * app->img_size);
+	else
+	{
+		if (i == 0 && j == 0)
+			mlx_put_image_to_window(app->mlx, app->window.reference,
+				app->wall.frame_img, j * app->img_size,
+				i * app->img_size);
+		else
+			mlx_put_image_to_window(app->mlx, app->window.reference,
+				app->wall.wall_img_1, j * app->img_size,
+				i * app->img_size);
+	}
 }

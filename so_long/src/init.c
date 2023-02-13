@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:59:17 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 17:59:49 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:43:10 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	game_setup(t_program *app)
 	app->egg.total_frames = 1500;
 	app->player.counter = 0;
 	app->player.total_frames = 1500;
-	app->player.position = get_player_position(app);
+	app->player.position = get_player_position(&app->map);
 	app->heart.counter = 0;
 	app->heart.total_frames = 1500;
 	app->enemy.counter = 0;

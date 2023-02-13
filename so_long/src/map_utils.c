@@ -6,13 +6,13 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:53:22 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 19:18:42 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:06:54 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-t_vector	get_player_position(t_program *app)
+t_vector	get_player_position(t_map *map)
 {
 	int			i;
 	int			j;
@@ -23,16 +23,16 @@ t_vector	get_player_position(t_program *app)
 	j = -1;
 	position.x = -1;
 	position.y = -1;
-	matrix = app->map.matrix;
+	matrix = map->matrix;
 	while (matrix[++i])
 	{
 		while (matrix[i][++j])
 		{
-			if (matrix[i][j] == 'P')
+			if (matrix[i][j] == 'p')
 			{
 				position.x = j;
 				position.y = i;
-				matrix[i][j] = '0';
+				matrix[i][j] = 'o';
 				return (position);
 			}
 		}
@@ -53,7 +53,7 @@ t_vector	get_exit_position(t_program *app)
 	{
 		while (matrix[vector.y][vector.x])
 		{
-			if (matrix[vector.y][vector.x] == 'E')
+			if (matrix[vector.y][vector.x] == 'S')
 			{
 				return (vector);
 			}

@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:22:56 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 17:49:57 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:07:14 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool	collected_all(t_program *app)
 	{
 		while (matrix[i][j])
 		{
-			if (matrix[i][j] == 'C')
+			if (matrix[i][j] == 'c')
 				return (false);
 			j++;
 		}
@@ -64,16 +64,16 @@ t_bool	move_is_allowed(t_program *app, int key)
 	if (app->finish)
 		return (false);
 	else if ((key == 100 || key == 65363) && matrix[y][x + 1] != '1'
-		&& matrix[y][x + 1] != 'E')
+		&& matrix[y][x + 1] != 'S')
 		return (true);
 	else if ((key == 97 || key == 65361) && matrix[y][x - 1] != '1'
-		&& matrix[y][x - 1] != 'E')
+		&& matrix[y][x - 1] != 'S')
 		return (true);
 	else if ((key == 115 || key == 65364) && matrix[y + 1][x] != '1'
-		&& matrix[y + 1][x] != 'E')
+		&& matrix[y + 1][x] != 'S')
 		return (true);
 	else if ((key == 119 || key == 65362) && matrix[y - 1][x] != '1'
-		&& matrix[y - 1][x] != 'E')
+		&& matrix[y - 1][x] != 'S')
 		return (true);
 	return (false);
 }

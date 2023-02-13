@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:19 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/10 18:06:42 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:48:44 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,16 @@ typedef enum s_bool
 	true
 }	t_bool;
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	int	x;
 	int	y;
 }				t_vector;
 
-typedef struct	s_window {
+typedef struct s_window {
 	void		*reference;
 	t_vector	size;
 }				t_window;
-
-typedef struct	s_image {
-	void		*reference;
-	t_vector	size;
-	char		*pixels;
-	int			bits_per_pixel;
-	int			line_size;
-	int			endian;
-}				t_image;
 
 typedef struct s_player
 {
@@ -101,10 +92,10 @@ typedef struct s_map
 
 typedef struct s_exit
 {
-	void	*exit_closed_img;
-	void	*exit_open_img;
+	void		*exit_closed_img;
+	void		*exit_open_img;
 	t_vector	exit_vector;
-} t_exit;
+}	t_exit;
 
 typedef struct s_enemy
 {
@@ -116,7 +107,7 @@ typedef struct s_enemy
 	t_vector	position;
 }	t_enemy;
 
-typedef struct	s_program {
+typedef struct s_program {
 	void		*mlx;
 	t_window	window;
 	int			img_size;
@@ -132,65 +123,42 @@ typedef struct	s_program {
 	t_enemy		enemy;
 }				t_program;
 
-void		ft_putnbr(int n);
-void		ft_putchar(char c);
-void		hooks(t_program *app);
-t_window	new_window(void *mlx, int widht, int height, char *name);
-void		draw_square(t_program *app, int x, int y, int width, int height, int color);
-t_bool		map_is_valid(char *str, t_map *map);
 int			main(int argc, char *argv[]);
-int			control(int key, void *param);
 int			close_app(void *param);
-
-
-//init
-void	init_game(t_program *app);
-
-//errors
+void		init_game(t_program *app);
+int			update(t_program *app);
+int			control(int key, void *param);
+t_window	new_window(void *mlx, int widht, int height, char *name);
 void		invalid_map(t_map *map);
 void		invalid_args(char *str);
-
-//map_utils
-t_vector	get_player_position(t_program *app);
+t_vector	get_player_position(t_map *map);
 t_vector	get_exit_position(t_program *app);
 t_vector	get_map_size(char *str);
 void		free_map(t_map *map);
 void		get_map(char *str, t_map *map);
-
-//map_mod
-void	collect(t_program *app);
-void	open_exit(t_program *app);
-void	place_enemy(t_program *app);
-
-//update
-int	update(t_program *app);
-
-//render
-void	draw_exit(t_program *app);
-void	draw_hearts(t_program *app);
-void	draw_enemy(t_program *app);
-void	draw_eggs(t_program *app);
-void	draw_walls(t_program *app);
-
-void	move_enemy(t_program *app);
-
-//game checkers
-void	has_won(t_program *app);
-t_bool	has_lost(t_program *app);
-t_bool	collected_all(t_program *app);
-t_bool	move_is_allowed(t_program *app, int	key);
-
-
-
-//animation
-void	player_animation(t_program *app);
-void	egg_animation(t_egg *egg);
-void	heart_animation(t_heart *heart);
-void	enemy_animation(t_program *app);
-
-
-void	open_exit(t_program *app);
-
-int random_number(void);
+t_bool		map_is_valid(char *str, t_map *map);
+t_bool		has_closed_path(t_map *map);
+t_bool		has_char(t_map *map, char c);
+t_bool		has_invalid_char(t_map *map);
+void		collect(t_program *app);
+void		open_exit(t_program *app);
+void		place_enemy(t_program *app);
+void		draw_exit(t_program *app);
+void		draw_hearts(t_program *app);
+void		draw_enemy(t_program *app);
+void		draw_borders(t_program *app, int i, int j);
+void		draw_eggs(t_program *app);
+void		draw_walls(t_program *app);
+void		move_enemy(t_program *app);
+void		has_won(t_program *app);
+t_bool		has_lost(t_program *app);
+t_bool		collected_all(t_program *app);
+t_bool		move_is_allowed(t_program *app, int key);
+void		player_animation(t_program *app);
+void		egg_animation(t_egg *egg);
+void		heart_animation(t_heart *heart);
+void		enemy_animation(t_program *app);
+void		open_exit(t_program *app);
+int			random_number(void);
 
 #endif
