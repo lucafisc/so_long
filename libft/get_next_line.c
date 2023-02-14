@@ -118,4 +118,3 @@ char	*get_next_line(int fd)
 	stash = trim_before_newline(stash);
 	return (line);
 }
-

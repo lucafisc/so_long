@@ -38,7 +38,10 @@ static char *_d2d56f08213403fa098136f9bc9a689KZwzdMGgOZQUrlqp[] = {
 "                        ................    ....    ........    ",
 "                        ................    ....    ........    ",
 "                    ....    ............................    ....",
-"                    ....    ............................    ....",
+"                    ..t and the third one are representations of base-10 signed integers
+  that fit in an int.
+- The second one is an arithmetic operator chosen from: + - * / %
+..    ............................    ....",
 "                    ....    ............................    ....",
 "                    ....    ............................    ....",
 "                                                                ",
