@@ -6,9 +6,6 @@
 
 This project is a simple 2D game where a player must collect all the items on a map and then reach the exit. The game is built using the mlx library, which is a simple graphics library designed for use in creating 2D games and other visual applications. 
 
-| ![Game](https://i.imgur.com/hLKwEZj.gif) | 
-|:--:| 
-
 External functions: [`open`](https://man7.org/linux/man-pages/man2/open.2.html), [`close`](https://man7.org/linux/man-pages/man2/close.2.html), [`read`](https://man7.org/linux/man-pages/man2/read.2.html), [`write`](https://man7.org/linux/man-pages/man2/write.2.html), [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html), [`free`](https://man7.org/linux/man-pages/man3/free.3.html), [`exit`](https://man7.org/linux/man-pages/man3/exit.3.html), and all functions of the [`minilibx`](https://github.com/42Paris/minilibx).
 
 ## How to Play
@@ -53,10 +50,9 @@ Here's an example of a valid map file:
 1000000E1
 111111111
 ```
-This map file will generate the following map:
+This file will generate the following map:
 
-| ![Game](https://i.imgur.com/PKRKAL7.png) | 
-|:--:| 
+<img src="https://i.imgur.com/PKRKAL7.png" width="30%">
 
 ## How to use
 
@@ -103,7 +99,3 @@ To clean the compiled files, run the following command:
 ```
 make clean
 ```
-
-
-| ![Game](https://i.imgur.com/FukZ78Q.gif) | 
-|:--:| 
