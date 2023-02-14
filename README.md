@@ -14,15 +14,7 @@ External functions: [`open`](https://man7.org/linux/man-pages/man2/open.2.html),
 ## How to Play
 
 The player starts at the beginning of the map and must collect all the items before reaching the exit. The player can move up, down, left, and right. The game is won when the player collects all the items and reaches the exit. The game is lost if the player collides with an enemy.
-111111111
-1P00000C1
-10000C001
-111111001
-100C00001
-10C111111
-100C00001
-1000000E1
-111111111
+
 ### Available Commands
 
 The game supports the following commands:
@@ -67,8 +59,6 @@ This map file will generate the following map:
 |:--:| 
 
 ## How to use
-
-## Building and Running
 
 Before building and running the game, you should first clone this repository and the `minilibx` library, which is required to compile the project. You can do this with the following commands:
 
