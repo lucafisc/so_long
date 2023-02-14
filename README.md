@@ -9,6 +9,8 @@ This project is a simple 2D game where a player must collect all the items on a 
 | ![Game](https://i.imgur.com/hLKwEZj.gif) | 
 |:--:| 
 
+External functions: [`open`](https://man7.org/linux/man-pages/man2/open.2.html), [`close`](https://man7.org/linux/man-pages/man2/close.2.html), [`read`](https://man7.org/linux/man-pages/man2/read.2.html), [`write`](https://man7.org/linux/man-pages/man2/write.2.html), [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html), [`free`](https://man7.org/linux/man-pages/man3/free.3.html), [`exit`](https://man7.org/linux/man-pages/man3/exit.3.html), and all functions of the [`minilibx`](https://github.com/42Paris/minilibx).
+
 ## How to Play
 
 The player starts at the beginning of the map and must collect all the items before reaching the exit. The player can move up, down, left, and right. The game is won when the player collects all the items and reaches the exit. The game is lost if the player collides with an enemy.
@@ -71,7 +73,7 @@ This map file will generate the following map:
 Before building and running the game, you should first clone this repository and the `minilibx` library, which is required to compile the project. You can do this with the following commands:
 
 ```
-git clone git@github.com:username/so_long.git
+git clone git@github.com:lucafisc/so_long.git
 cd so_long
 git clone https://github.com/42Paris/minilibx-linux.git mlx
 ```
