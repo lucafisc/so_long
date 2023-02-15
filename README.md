@@ -6,7 +6,7 @@
 
 This project is a simple 2D game where a player must collect all the items on a map and then reach the exit. The game is built using the mlx library, which is a simple graphics library designed for use in creating 2D games and other visual applications. 
 
-External functions: [`open`](https://man7.org/linux/man-pages/man2/open.2.html), [`close`](https://man7.org/linux/man-pages/man2/close.2.html), [`read`](https://man7.org/linux/man-pages/man2/read.2.html), [`write`](https://man7.org/linux/man-pages/man2/write.2.html), [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html), [`free`](https://man7.org/linux/man-pages/man3/free.3.html), [`exit`](https://man7.org/linux/man-pages/man3/exit.3.html), and all functions of the [`minilibx`](https://github.com/42Paris/minilibx).
+External functions: [`open`](https://man7.org/linux/man-pages/man2/open.2.html), [`close`](https://man7.org/linux/man-pages/man2/close.2.html), [`read`](https://man7.org/linux/man-pages/man2/read.2.html), [`write`](https://man7.org/linux/man-pages/man2/write.2.html), [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html), [`free`](https://man7.org/linux/man-pages/man3/free.3.html), [`exit`](https://man7.org/linux/man-pages/man3/exit.3.html), and all functions of the [`minilibx`](https://github.com/42Paris/minilibx-linux).
 
 ## How to Play
 
