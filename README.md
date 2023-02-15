@@ -8,6 +8,9 @@ This project is a simple 2D game where a player must collect all the items on a 
 
 External functions: [`open`](https://man7.org/linux/man-pages/man2/open.2.html), [`close`](https://man7.org/linux/man-pages/man2/close.2.html), [`read`](https://man7.org/linux/man-pages/man2/read.2.html), [`write`](https://man7.org/linux/man-pages/man2/write.2.html), [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html), [`free`](https://man7.org/linux/man-pages/man3/free.3.html), [`exit`](https://man7.org/linux/man-pages/man3/exit.3.html), and all functions of the [`minilibx`](https://github.com/42Paris/minilibx-linux).
 
+| ![Visualizer](https://i.imgur.com/GxXAo5I.gif) | 
+|:--:| 
+
 ## How to Play
 
 The player starts at the beginning of the map and must collect all the items before reaching the exit. The player can move up, down, left, and right. The game is won when the player collects all the items and reaches the exit. The game is lost if the player collides with an enemy.
